@@ -1,0 +1,30 @@
+#nav-menu-latina-member {
+  height: 30px;
+  color: #3A3A3A;
+}
+
+#nav-menu-latina-member-2 {
+  @include media-query-max(xs) {
+    height: 170px;
+  }
+
+  @include media-query-min(sm) {
+    height: 150px;
+  }
+
+  @include media-query-min(md) {
+    height: 89px;
+  }
+
+  color: #555555;
+}
+
+.button-donate {
+  height: 28px;
+  font-size: 14px;
+  padding: 0px 5px;
+  border: 1px solid #EA99A3;
+  border-radius: 3px;
+  color: #FFFFFF;
+  background-color: #EA99A3;
+}
