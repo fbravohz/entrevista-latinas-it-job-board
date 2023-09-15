@@ -1,14 +1,64 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import { ToggleButtonComponent } from "../buttons/ToggleButtonComponent";
 import { InputComponent } from "../inputs/InputComponent";
 import JobItem from "./JobItem";
 
+
+const useBoardRequest = ({ formValues }) => {
+  const {
+    companyName,
+    functionalArea,
+    keywords,
+    locationFull,
+    perks,
+    recent,
+    seniority,
+  } = formValues;
+  const [serverResponse, setServerResponse] = useState([]);
+
+  const urlSearchParams = new URLSearchParams();
+  if (companyName) urlSearchParams.set("companyName", companyName);
+  if (functionalArea) urlSearchParams.set("functionalArea", functionalArea);
+  if (keywords) urlSearchParams.set("keywords", keywords);
+  if (locationFull) urlSearchParams.set("locationFull", locationFull);
+  if (perks) urlSearchParams.set("perks", perks);
+  if (recent) urlSearchParams.set("recent", recent);
+  if (seniority) urlSearchParams.set("seniority", seniority);
+
+  let options = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+    },
+    cache: "no-store",
+  };
+
+  useEffect(() => {
+    const response = async () => {
+      const params = urlSearchParams.toString();
+      const resp = await fetch(
+        `/api/jobs${params ? `?${params}` : ""}`,
+        options
+      );
+      const json = await resp.json();
+      setServerResponse(json.success);
+    };
+    response();
+  }, [formValues]);
+
+  return {
+    serverResponse,
+  };
+};
+
+
 const Board = () => {
   const [formValues, setFormValues] = useState({});
-  console.log(formValues);
+  const { serverResponse } = useBoardRequest({ formValues });
+
   return (
     <Row>
       <Col md={1} />
@@ -43,7 +93,7 @@ const Board = () => {
             <Col md={2}>
               <InputComponent
                 placeholder="Location"
-                name="location"
+                name="locationFull"
                 formValues={formValues}
                 setFormValues={setFormValues}
               />
@@ -74,7 +124,7 @@ const Board = () => {
                 setFormValues={setFormValues}
               />
               <ToggleButtonComponent
-                name="company"
+                name="companyName"
                 label="Company A-Z"
                 formValues={formValues}
                 setFormValues={setFormValues}
@@ -82,15 +132,20 @@ const Board = () => {
             </Col>
           </Row>
         </Form>
-        <JobItem/>
-        <JobItem/>
-        <JobItem/>
-        <JobItem/>
-        <JobItem/>
-        <JobItem/>
-        <JobItem/>
-        <JobItem/>
-        <JobItem/>
+        {serverResponse &&
+          serverResponse?.map((object, index) => (
+            <JobItem
+              key={index}
+              id={object.id}
+              title={object.jobTitle}
+              companyName={object.companyName}
+              postedTime={object.datePublished}
+              typeWork={object.jobType}
+              level={object.seniority}
+              tags={String(object.perks).split(';').map(perk => perk.trim())}
+              location={String(object.locationFull).split(';')[0]}
+            />
+          ))}
       </Col>
     </Row>
   );

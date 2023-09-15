@@ -46,7 +46,7 @@ const IndividualJobHeader = () => {
           </Col>
           <Col xs={12} sm={6} className="d-flex justify-content-center">
             {tags.map((value, index) => (
-              <Col xs={2} className="mt-md-2">
+              <Col key={index} xs={2} className="mt-md-2">
                 <Image
                   key={index}
                   style={{ minWidth: "40px" }}

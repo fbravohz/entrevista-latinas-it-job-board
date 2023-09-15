@@ -25,8 +25,6 @@ export function ToggleButtonComponent({
     setIsChecked(!isChecked);
   };
   
-  console.log(name, isChecked)
-
   return (
     <>
       <label htmlFor={`button-checkbox-${name}`} className={labelClassName}>

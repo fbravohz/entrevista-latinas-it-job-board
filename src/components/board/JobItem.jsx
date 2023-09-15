@@ -13,7 +13,7 @@ const JobItem = ({
   typeWork = "Full Time",
   location = "Remote",
   level = "Entry level",
-  tags = [1, 2, 3, 4, 5, 6],
+  tags = ["latinxintech","womenintecherg", "remotefriendly", "paidparentalleave","unlimitedvacation", "lgbtqierg-2"]
 }) => {
   const router = useRouter()
   
@@ -78,14 +78,14 @@ const JobItem = ({
       >
         <Row className="d-flex-md justify-content-end">
           {tags.map((value, index) => (
-            <Col xs={2} sm={4} md={4} lg={2} className="mt-md-2">
+            <Col key={index} xs={2} sm={4} md={4} lg={2} className="mt-md-2">
               <Image
                 key={index}
                 style={{ minWidth: "40px" }}
                 width={58}
                 height={58}
-                src={`/images/tags-${value}.svg`}
-                alt={`tags-${value}`}
+                src={`/images/${value}.svg`}
+                alt={`${value}`}
               />
             </Col>
           ))}
