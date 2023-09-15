@@ -1,32 +1,44 @@
-import { useState } from "react";
-import { ButtonGroup } from "react-bootstrap";
-import ToggleButton from "react-bootstrap/ToggleButton";
-import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
+"use client"
+
+import { useEffect, useState } from "react";
 
 export function ToggleButtonComponent({
-  name = "toggleButton",
-  label = "Button",
+  name,
+  label,
   formValues,
   setFormValues = () => {},
 }) {
-  const [value, setValue] = useState([]);
+  const [isChecked, setIsChecked] = useState(false);
 
-  const handleToggle = (e) => {
-    console.log(e);
-    // setValue(checked);
+  useEffect(() => {
+    setFormValues({
+      ...formValues,
+      [name]: isChecked,
+    });
+  }, [isChecked]);
+
+  const labelClassName = isChecked
+    ? "button-check-label"
+    : "button-not-check-label";
+
+  const toggleCheckbox = () => {
+    setIsChecked(!isChecked);
   };
   
-  console.log("value",value);
+  console.log(name, isChecked)
 
   return (
-    <ToggleButtonGroup className="mb-2"  type="checkbox" value={value} onChange={handleToggle}>
-      <ToggleButton
-        value={"asdasd"}
-        variant="outline-secondary"
-        className="btn-outline-secondary"
-      >
-        {"Recent"}
-      </ToggleButton>
-      </ToggleButtonGroup>
+    <>
+      <label htmlFor={`button-checkbox-${name}`} className={labelClassName}>
+        <input
+          id={`button-checkbox-${name}`}
+          className="button-checkbox"
+          type="checkbox"
+          checked={isChecked}
+          onChange={toggleCheckbox}
+        />
+        {label}
+      </label>
+    </>
   );
 }

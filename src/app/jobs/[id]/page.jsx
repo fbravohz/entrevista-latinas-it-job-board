@@ -1,12 +1,23 @@
-"use client"
+"use client";
 
-import React from 'react'
+import IndividualJobBody from "@/components/individualJob/IndividualJobBody";
+import IndividualJobFooter from "@/components/individualJob/IndividualJobFooter";
+import IndividualJobHeader from "@/components/individualJob/IndividualJobHeader";
 
-const Page = ({params: {id}}) => {
-
+const Page = ({ params: { id } }) => {
   return (
-    <div>page</div>
-  )
-}
+    <>
+      <header>
+        <IndividualJobHeader />
+      </header>
+      <main>
+        <IndividualJobBody />
+      </main>
+      <footer>
+        <IndividualJobFooter />
+      </footer>
+    </>
+  );
+};
 
-export default Page
+export default Page;

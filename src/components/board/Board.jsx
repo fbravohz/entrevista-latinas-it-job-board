@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import { ToggleButtonComponent } from "../buttons/ToggleButtonComponent";
 import { InputComponent } from "../inputs/InputComponent";
+import JobItem from "./JobItem";
 
 const Board = () => {
   const [formValues, setFormValues] = useState({});
@@ -11,7 +12,7 @@ const Board = () => {
   return (
     <Row>
       <Col md={1} />
-      <Col md={10}>
+      <Col md={10} className="board-container">
         <Form>
           <Row className="mb-4">
             <strong className="fs-5">Search by filters</strong>
@@ -51,7 +52,7 @@ const Board = () => {
           <hr />
           <Row className="my-4">
             <strong className="fs-5">Search by keywords</strong>
-            <Col md={7}>
+            <Col sm={6} md={7} lg={8}>
               <InputComponent
                 placeholder="Keywords"
                 name="keywords"
@@ -60,11 +61,13 @@ const Board = () => {
               />
             </Col>
             <Col
+              sm={6}
               md={5}
+              lg={4}
               className="d-flex justify-content-around align-items-center"
             >
               <span>Order by:</span>
-              {/* <ToggleButtonComponent
+              <ToggleButtonComponent
                 name="recent"
                 label="Recent"
                 formValues={formValues}
@@ -75,11 +78,19 @@ const Board = () => {
                 label="Company A-Z"
                 formValues={formValues}
                 setFormValues={setFormValues}
-              /> */}
+              />
             </Col>
           </Row>
         </Form>
-        <img style={{ width: "4rem" }} src="logo.svg" alt="My Happy SVG" />
+        <JobItem/>
+        <JobItem/>
+        <JobItem/>
+        <JobItem/>
+        <JobItem/>
+        <JobItem/>
+        <JobItem/>
+        <JobItem/>
+        <JobItem/>
       </Col>
     </Row>
   );
