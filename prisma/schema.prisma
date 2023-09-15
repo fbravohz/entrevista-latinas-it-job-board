@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Jobs {
+  id                 Int       @id @default(autoincrement())
+  jobTitle           String?   @map("job_title") @db.VarChar(45)
+  datePublished      DateTime? @map("date_published")
+  jobType            String?   @map("job_type") @db.VarChar(45)
+  companyName        String?   @map("company_name") @db.VarChar(45)
+  contingency        String?   @map("contingency") @db.VarChar(45)
+  locationFull       String?   @map("location_full") @db.VarChar(45)
+  url                String?   @map("url") @db.VarChar(200)
+  perks              String?   @map("perks") @db.VarChar(200)
+  seniority          String?   @map("seniority") @db.VarChar(45)
+  senioritySlug      String?   @map("seniority_slug") @db.VarChar(45)
+  functionalArea     String?   @map("functional_area") @db.VarChar(45)
+  functionalAreaSlug String?   @map("functional_area_slug") @db.VarChar(45)
+
+  @@map("jobs")
+}
