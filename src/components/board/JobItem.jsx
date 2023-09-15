@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import Image from "next/image";
 
 const JobItem = ({
-  id = "negro",
+  id = "1",
   title = "Job role title and it can be quite long",
   companyName = "Company name",
   postedTime = "Posted x days ago",
