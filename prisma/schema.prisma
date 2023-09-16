@@ -5,7 +5,7 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = "mysql://doadmin:AVNS_ZVFT6Fvk6MSsYrrXX9x@db-mysql-nyc1-18083-do-user-14663188-0.b.db.ondigitalocean.com:25060/defaultdb"
+  url      = env("DATABASE_URL")
 }
 
 model Jobs {
