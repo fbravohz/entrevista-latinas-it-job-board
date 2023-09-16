@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
 import React from "react";
 import { Col, Row } from "react-bootstrap";
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 const JobItem = ({
@@ -13,19 +13,23 @@ const JobItem = ({
   typeWork = "Full Time",
   location = "Remote",
   level = "Entry level",
-  tags = ["latinxintech","womenintecherg", "remotefriendly", "paidparentalleave","unlimitedvacation", "lgbtqierg-2"]
+  tags = [
+    "latinxintech",
+    "womenintecherg",
+    "remotefriendly",
+    "paidparentalleave",
+    "unlimitedvacation",
+    "lgbtqierg-2",
+  ],
 }) => {
-  const router = useRouter()
-  
+  const router = useRouter();
+
   const handleNavigate = () => {
-    router.push(`/jobs/${id}`)
-  }
+    router.push(`/jobs/${id}`);
+  };
 
   return (
-    <Row
-      className="border-bottom p-3 job-row"
-      onClick={handleNavigate}
-    >
+    <Row className="border-bottom p-3 job-row" onClick={handleNavigate}>
       <Col xs={8} sm={8} md={4} className="d-flex">
         <Image
           width={60}
@@ -74,11 +78,11 @@ const JobItem = ({
       <Col
         sm={12}
         md={5}
-        className="d-flex justify-content-end-md justify-content-center align-items-center mt-sm-2 mt-md-0"
+        className="d-flex justify-content-end-md justify-content-end align-items-center mt-sm-2 mt-md-0"
       >
-        <Row className="d-flex-md justify-content-end">
-          {tags.map((value, index) => (
-            <Col key={index} xs={2} sm={4} md={4} lg={2} className="mt-md-2">
+        {tags.map((value, index) => {
+          return (
+            <Col key={index} xs={2} className="mt-md-2">
               <Image
                 key={index}
                 style={{ minWidth: "40px" }}
@@ -88,8 +92,8 @@ const JobItem = ({
                 alt={`${value}`}
               />
             </Col>
-          ))}
-        </Row>
+          );
+        })}
       </Col>
     </Row>
   );

@@ -4,8 +4,13 @@ import Image from "next/image";
 import React from "react";
 import { Col, Row } from "react-bootstrap";
 import JobItem from "../board/JobItem";
+import { useBoardRequest } from "@/hooks/useBoardRequest";
+import moment from "moment";
 
-const IndividualJobBody = () => {
+const IndividualJobBody = ({ id, url }) => {
+  const { serverResponse } = useBoardRequest({});
+  const filtered = serverResponse.filter((job) => job.id != id);
+  const relatedJobs = filtered.slice(0, 5);
   return (
     <Row style={{ backgroundColor: "#f4f4f4" }} className="py-5 px-3">
       <Col sm={1} />
@@ -81,7 +86,7 @@ const IndividualJobBody = () => {
                   conference—any type of event organizer can host a Hopin.
                 </p>
                 <div>
-                  <button type="button" className="see-company-button">
+                  <button type="button" className="see-company-button" onClick={() => window.open(url)}>
                     See Company Profile
                   </button>
                 </div>
@@ -101,10 +106,24 @@ const IndividualJobBody = () => {
           <Row className="bg-white p-4 mb-5">
             <h3 className="fs-3">
               <strong>Similar Jobs</strong>
-              <JobItem />
-              <JobItem />
-              <JobItem />
-              <JobItem />
+              {relatedJobs?.map((object, index) => (
+                <JobItem
+                  key={index}
+                  id={object.id}
+                  title={object.jobTitle}
+                  companyName={object.companyName}
+                  postedTime={`Posted ${moment(
+                    object.datePublished,
+                    "YYYYMMDD"
+                  ).fromNow()}`}
+                  typeWork={object.jobType}
+                  level={object.seniority}
+                  tags={String(object.perks)
+                    .split(";")
+                    .map((perk) => perk.trim())}
+                  location={String(object.locationFull).split(";")[0]}
+                />
+              ))}
             </h3>
           </Row>
         </section>

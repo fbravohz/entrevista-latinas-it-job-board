@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { Col, Row } from "react-bootstrap";
@@ -79,6 +80,29 @@ const IndividualJobFooter = () => {
             </strong>
           </div>
         </Row>
+      </Row>
+      <Row className="mb-2 py-3" style={{ backgroundColor: "#3a3a3a" }}>
+        <Col xs={12} md={1} />
+        <Col xs={12} md={8}>
+          <div className="fs-6 text-white text-left ms-3">
+            <strong className="ms-1">
+              © Latinas in Tech{" "}
+              <span className="pink-job-title">Cookie Policy</span> |{" "}
+              <span className="pink-job-title">Terms of use</span> |{" "}
+              <span className="pink-job-title">Privacy Policy</span>
+            </strong>
+          </div>
+        </Col>
+        <Col xs={12} md={1} className="d-flex justify-content-center">
+          <Image
+            className="mb-1"
+            width={250}
+            height={250}
+            src="/images/social.svg"
+            alt="social"
+          />
+        </Col>
+        <Col xs={12} md={2} />
       </Row>
     </>
   );

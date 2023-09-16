@@ -16,11 +16,9 @@ export async function GET(request) {
 
     const orderBy = [];
     if (recent) {
-      orderBy.push({ datePublished: recent  ? "desc" : "asc" });
+      orderBy.push({ datePublished: recent ? "desc" : "asc" });
     }
-    if (companyName) {
-      orderBy.push({ companyName: companyName ? "asc" : "desc" });
-    }
+    orderBy.push({ companyName: companyName ? "asc" : "desc" });
 
     const res = await prisma.jobs.findMany({
       where: {
